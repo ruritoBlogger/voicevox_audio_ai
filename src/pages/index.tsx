@@ -1,15 +1,12 @@
-import PresenLayout from "@components/PresenLayout";
 import { css } from "@emotion/css";
 import { NextPage } from "next";
-import { SWRConfig } from "swr";
+import { Typography } from "@mui/material";
 
 const App: NextPage = () => {
   return (
-    <SWRConfig value={{ suspense: true }}>
-      <div className={rootStyle}>
-        <PresenLayout Sidebar={() => <p>サイドバー(予定)</p>} />
-      </div>
-    </SWRConfig>
+    <div className={rootStyle}>
+      <Typography>voicevox + chatGPT</Typography>
+    </div>
   );
 };
 
