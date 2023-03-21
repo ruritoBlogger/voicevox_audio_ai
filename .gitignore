@@ -1,0 +1,9 @@
+node_modules
+dist
+.idea
+.next
+out
+public/*
+!public/.gitkeep
+!public/LTSupportTool.gif
+src/libs/Core
