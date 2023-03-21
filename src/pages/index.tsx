@@ -9,9 +9,16 @@ import {
   Typography,
 } from "@mui/material";
 import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
 
 const App: NextPage = () => {
   const [message, setMessage] = useState<string>("");
+  const { asPath } = useRouter();
+  const origin =
+    typeof window !== "undefined" && window.location.origin
+      ? window.location.origin
+      : "";
+  const originUrl: string = `${origin}${asPath}`;
 
   const handleTextFieldChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,9 +27,16 @@ const App: NextPage = () => {
     []
   );
 
-  const handleSubmit = useCallback(() => {
-    console.log(message);
-  }, [message]);
+  const handleSubmit = useCallback(async () => {
+    const result = await fetch(`${originUrl}/api/voicevox`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: message }),
+    });
+    console.log(result);
+  }, [message, originUrl]);
 
   return (
     <Container maxWidth={"xl"}>
