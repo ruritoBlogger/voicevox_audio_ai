@@ -14,11 +14,14 @@ import { useRouter } from "next/router";
 const App: NextPage = () => {
   const [message, setMessage] = useState<string>("");
   const { asPath } = useRouter();
+
   const origin =
     typeof window !== "undefined" && window.location.origin
       ? window.location.origin
       : "";
   const originUrl: string = `${origin}${asPath}`;
+  const ctx = typeof window !== "undefined" ? new AudioContext() : null;
+  const playSound = ctx?.createBufferSource() ?? null;
 
   const handleTextFieldChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,19 +31,25 @@ const App: NextPage = () => {
   );
 
   const handleSubmit = useCallback(async () => {
-    const result = await fetch(`${originUrl}/api/voicevox`, {
+    const rawData = await fetch(`${originUrl}/api/voicevox`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ message: message }),
     });
-    console.log(result);
-  }, [message, originUrl]);
+    const rawAudio = await rawData.arrayBuffer();
+    if (!ctx || !playSound) return;
+
+    const audio = await ctx.decodeAudioData(rawAudio);
+    playSound.buffer = audio;
+    playSound.connect(ctx.destination);
+    playSound.start(ctx.currentTime);
+  }, [ctx, message, originUrl, playSound]);
 
   return (
     <Container maxWidth={"xl"}>
-      <Stack spacing={2}>
+      <Stack id={"test"} spacing={2}>
         <Typography variant={"h4"}>
           VoiceVox + ChatGPT でお手軽会話App
         </Typography>

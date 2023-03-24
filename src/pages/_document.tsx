@@ -13,7 +13,6 @@ class MyDocument extends Document implements CustomDocumentInterface {
         <Head>
           <meta charSet="utf-8" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <script src="./live2dcubismcore.min.js" />
         </Head>
         <body>
           <Main />
