@@ -12,6 +12,8 @@
     "lint:fix": "eslint -c .eslintrc.json --no-eslintrc src/**/*.{ts,tsx} --fix",
     "format": "prettier src/**/*.{ts,tsx}",
     "format:fix": "prettier --write src/**/*.{ts,tsx}",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
     "codegen:server": "graphql-codegen --config graphql/codegen-server.yaml"
   },
   "lint-staged": {

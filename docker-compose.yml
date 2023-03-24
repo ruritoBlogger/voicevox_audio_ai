@@ -18,6 +18,24 @@ services:
       - "50021:50021"
     networks:
       - mynetwork
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: develop
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db-store:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - mynetwork
 networks:
   mynetwork:
     external: true
+volumes:
+  db-store:
