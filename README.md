@@ -14,5 +14,11 @@ $ docker compose build
 $ docker compose up -d
 
 # prisma の migrate
-$ docker compose exec --rm app yarn prisma:migrate
+$ docker compose run --rm app yarn prisma:migrate
+
+# prisma の studio を起動
+$ docker compose run --rm app yarn prisma:studio
+
+# prisma の seed データの挿入
+$ docker compose run --rm app yarn prisma:seed
 ```
