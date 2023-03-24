@@ -5,6 +5,4 @@ dist
 out
 public/*
 !public/.gitkeep
-!public/LTSupportTool.gif
-src/libs/Core
 *.wav
