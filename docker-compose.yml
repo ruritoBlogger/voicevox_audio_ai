@@ -9,6 +9,7 @@ services:
     command: yarn dev
     ports:
       - "3000:3000"
+      - '5555:5555'
     stdin_open: true
     networks:
       - mynetwork

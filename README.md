@@ -12,4 +12,7 @@ $ docker compose build
 
 # コンテナの起動
 $ docker compose up -d
+
+# prisma の migrate
+$ docker compose exec --rm app yarn prisma:migrate
 ```
