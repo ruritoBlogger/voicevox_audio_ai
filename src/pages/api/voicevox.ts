@@ -17,7 +17,6 @@ const handler: NextApiHandler = async (
     }
   );
   const parsedData = await queryResult.json();
-  console.log(parsedData);
 
   const talkResult = await fetch(`http://voicevox:50021/synthesis?speaker=1`, {
     method: "POST",
