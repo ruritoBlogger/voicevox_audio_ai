@@ -10,7 +10,14 @@ services:
     ports:
       - "3000:3000"
     stdin_open: true
+    networks:
+      - mynetwork
   voicevox:
     image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
     ports:
       - "50021:50021"
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    external: true
