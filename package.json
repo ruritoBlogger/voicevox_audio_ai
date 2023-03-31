@@ -15,6 +15,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:seed": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} src/seed.ts",
+    "codegen:client": "graphql-codegen --config graphql/codegen-client.yaml",
     "codegen:server": "graphql-codegen --config graphql/codegen-server.yaml"
   },
   "lint-staged": {
