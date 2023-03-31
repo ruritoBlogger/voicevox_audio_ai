@@ -4,6 +4,7 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { Resolvers } from "../../../graphql/dist/generated-server";
 import gql from "graphql-tag";
 import * as query from "../../resolvers/query";
+import * as mutation from "../../resolvers/mutation";
 
 // TODO: schemaから取得したい
 const typeDefs = gql`
@@ -24,6 +25,7 @@ const typeDefs = gql`
 
 const resolvers: Resolvers = {
   Query: query,
+  Mutation: mutation,
 };
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
