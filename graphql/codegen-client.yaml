@@ -1,0 +1,7 @@
+schema: './graphql/schema.graphql'
+documents: 'src/**/*.graphql'
+generates:
+  ./graphql/dist/client/:
+    preset: client
+    config:
+      useIndexSignature: true
