@@ -10,6 +10,12 @@ const typeDefs = gql`
   type Query {
     comments: [Comment!]!
   }
+  type Mutation {
+    addComment(data: AddCommentInput!): Comment!
+  }
+  input AddCommentInput {
+    content: String!
+  }
   type Comment {
     id: ID!
     content: String!
