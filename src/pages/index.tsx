@@ -11,9 +11,15 @@ import {
 import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 import { CommentList } from "@components/CommentList";
+import { useMutation } from "@apollo/client";
+import {
+  AddCommentDocument,
+  CommentsDocument,
+} from "../../graphql/dist/client/graphql";
 
 const App: NextPage = () => {
   const [message, setMessage] = useState<string>("");
+  const [addComment] = useMutation(AddCommentDocument);
   const { asPath } = useRouter();
 
   const origin =
@@ -38,6 +44,11 @@ const App: NextPage = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ message: message }),
+    });
+    // TODO: キャッシュ更新して反映させたい
+    await addComment({
+      variables: { content: message },
+      refetchQueries: [CommentsDocument],
     });
     const rawAudio = await rawData.arrayBuffer();
     if (!ctx || !playSound) return;
