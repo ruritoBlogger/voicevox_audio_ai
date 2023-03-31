@@ -1,0 +1,6 @@
+mutation addComment($content: String!) {
+    addComment(data: {content: $content}) {
+        id
+        content
+    }
+}
