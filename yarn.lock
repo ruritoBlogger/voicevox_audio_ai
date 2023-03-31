@@ -15,10 +15,10 @@
   resolved "https://registry.yarnpkg.com/@apollo/cache-control-types/-/cache-control-types-1.0.2.tgz#f42ed3563acc7f1f50617d65d208483977adc68e"
   integrity sha512-Por80co1eUm4ATsvjCOoS/tIR8PHxqVjsA6z76I6Vw0rFn4cgyVElQcmQDIZiYsy41k8e5xkrMRECkM2WR8pNw==
 
-"@apollo/client@^3.7.10":
-  version "3.7.10"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.7.10.tgz#addc5fcebaf016981d9476268a06d529be83f568"
-  integrity sha512-/k1MfrqPKYiPNdHcOzdxg9cEx96vhAGxAcSorzfBvV29XtFQcYW2cPNQOTjK/fpSMtqVo8UNmu5vwQAWD1gfCg==
+"@apollo/client@^3.8.0-alpha.11":
+  version "3.8.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.8.0-alpha.11.tgz#3f018926c323d09209f142aac8153c8fbb9370a2"
+  integrity sha512-82ZJv43cRviWyUIiOMdJDQqaLZWc1zwT7PKsTxKMtBJEZ3pwrklpLSMMBUAHOZ4nBWmuHV9TD83m32h/U9mR8w==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     "@wry/context" "^0.7.0"
@@ -26,7 +26,7 @@
     "@wry/trie" "^0.3.0"
     graphql-tag "^2.12.6"
     hoist-non-react-statics "^3.3.2"
-    optimism "^0.16.1"
+    optimism "^0.17.0"
     prop-types "^15.7.2"
     response-iterator "^0.2.6"
     symbol-observable "^4.0.0"
@@ -4822,13 +4822,14 @@ opener@^1.5.2:
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.5.2.tgz#5d37e1f35077b9dcac4301372271afdeb2a13598"
   integrity sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==
 
-optimism@^0.16.1:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/optimism/-/optimism-0.16.2.tgz#519b0c78b3b30954baed0defe5143de7776bf081"
-  integrity sha512-zWNbgWj+3vLEjZNIh/okkY2EUfX+vB9TJopzIZwT1xxaMqC5hRLLraePod4c5n4He08xuXNH+zhKFFCu390wiQ==
+optimism@^0.17.0:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/optimism/-/optimism-0.17.1.tgz#d3126abb84a1217f722c9a87d9ea8cb7ea96cd6f"
+  integrity sha512-1q978py9I7e6dYTAqF37TtZ2Ftr8ooL9m6mNkpdlte0F6rA6MrkpESCC52uiaF5jw4rdknWNyuSiN7lGlbj4Cg==
   dependencies:
     "@wry/context" "^0.7.0"
     "@wry/trie" "^0.3.0"
+    tslib "^2.3.0"
 
 optionator@^0.9.1:
   version "0.9.1"
