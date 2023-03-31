@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
+import { CommentList } from "@components/CommentList";
 
 const App: NextPage = () => {
   const [message, setMessage] = useState<string>("");
@@ -68,6 +69,7 @@ const App: NextPage = () => {
             </Button>
           </Grid>
         </Grid>
+        <CommentList />
       </Stack>
     </Container>
   );
