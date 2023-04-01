@@ -37,6 +37,26 @@ const App: NextPage = () => {
     []
   );
 
+  const handlePlay = useCallback(
+    async (playedMessage: string) => {
+      const rawData = await fetch(`${originUrl}/api/voicevox`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: playedMessage }),
+      });
+      const rawAudio = await rawData.arrayBuffer();
+      if (!ctx || !playSound) return;
+
+      const audio = await ctx.decodeAudioData(rawAudio);
+      playSound.buffer = audio;
+      playSound.connect(ctx.destination);
+      playSound.start(ctx.currentTime);
+    },
+    [ctx, originUrl, playSound]
+  );
+
   const handleSubmit = useCallback(async () => {
     const rawData = await fetch(`${originUrl}/api/voicevox`, {
       method: "POST",
@@ -57,7 +77,7 @@ const App: NextPage = () => {
     playSound.buffer = audio;
     playSound.connect(ctx.destination);
     playSound.start(ctx.currentTime);
-  }, [ctx, message, originUrl, playSound]);
+  }, [addComment, ctx, message, originUrl, playSound]);
 
   return (
     <Container maxWidth={"xl"}>
@@ -80,7 +100,7 @@ const App: NextPage = () => {
             </Button>
           </Grid>
         </Grid>
-        <CommentList />
+        <CommentList onPlayButtonClick={handlePlay} />
       </Stack>
     </Container>
   );

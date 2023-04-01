@@ -8,9 +8,23 @@ import {
 import { useSuspenseQuery_experimental as useSuspenseQuery } from "@apollo/client";
 import { CommentsDocument } from "../../../graphql/dist/client/graphql";
 import { PlayArrow } from "@mui/icons-material";
+import { useCallback } from "react";
 
-export const CommentList = (): JSX.Element => {
+interface CommentListInput {
+  onPlayButtonClick(message: string): void;
+}
+
+export const CommentList = ({
+  onPlayButtonClick,
+}: CommentListInput): JSX.Element => {
   const { data } = useSuspenseQuery(CommentsDocument);
+
+  const handleButtonClick = useCallback(
+    (message: string) => () => {
+      onPlayButtonClick(message);
+    },
+    [onPlayButtonClick]
+  );
 
   return (
     <>
@@ -18,7 +32,7 @@ export const CommentList = (): JSX.Element => {
         {data.comments.map((comment) => (
           <ListItem key={comment.id}>
             <ListItemAvatar>
-              <IconButton>
+              <IconButton onClick={handleButtonClick(comment.content)}>
                 <PlayArrow />
               </IconButton>
             </ListItemAvatar>
