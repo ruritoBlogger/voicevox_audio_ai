@@ -3,6 +3,10 @@ generates:
   ./graphql/dist/generated-server.ts:
     config:
       useIndexSignature: true
+      strictScalars: true
+      scalars: {
+        Date: 'Date'
+      }
     plugins:
       - typescript
       - typescript-resolvers

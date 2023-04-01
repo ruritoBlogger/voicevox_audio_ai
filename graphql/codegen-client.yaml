@@ -5,3 +5,7 @@ generates:
     preset: client
     config:
       useIndexSignature: true
+      strictScalars: true
+      scalars: {
+        Date: 'Date'
+      }

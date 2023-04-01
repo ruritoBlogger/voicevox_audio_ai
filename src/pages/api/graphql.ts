@@ -8,6 +8,8 @@ import * as mutation from "../../resolvers/mutation";
 
 // TODO: schemaから取得したい
 const typeDefs = gql`
+  scalar Date
+
   type Query {
     comments: [Comment!]!
   }
@@ -20,6 +22,8 @@ const typeDefs = gql`
   type Comment {
     id: ID!
     content: String!
+    createdAt: Date!
+    updatedAt: Date!
   }
 `;
 
