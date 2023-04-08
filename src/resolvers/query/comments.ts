@@ -1,5 +1,9 @@
 import { prisma } from "../../prisma";
-import { QueryResolvers } from "../../../graphql/dist/generated-server";
+import {
+  QueryResolvers,
+  Comment,
+} from "../../../graphql/dist/generated-server";
+import { toBase64 } from "src/utils";
 
 export const comments: QueryResolvers["comments"] = async (
   parent,
@@ -7,5 +11,9 @@ export const comments: QueryResolvers["comments"] = async (
   context,
   info
 ) => {
-  return await prisma.comment.findMany();
+  const comments = await prisma.comment.findMany();
+  return comments.map<Comment>((comment) => ({
+    ...comment,
+    id: toBase64(`Comment:${comment.id}`),
+  }));
 };
