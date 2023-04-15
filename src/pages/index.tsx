@@ -79,6 +79,38 @@ const App: NextPage = () => {
     playSound.start(ctx.currentTime);
   }, [addComment, ctx, message, originUrl, playSound]);
 
+  const handleSubmitWithAi = useCallback(async () => {
+    const rawChatData = await fetch(`${originUrl}/api/chatgpt`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: message }),
+    });
+    const chatData = await rawChatData.json();
+    const chatDataMessage = chatData.message.content;
+
+    const rawData = await fetch(`${originUrl}/api/voicevox`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: chatDataMessage }),
+    });
+    // TODO: キャッシュ更新して反映させたい
+    await addComment({
+      variables: { content: chatDataMessage },
+      refetchQueries: [CommentsDocument],
+    });
+    const rawAudio = await rawData.arrayBuffer();
+    if (!ctx || !playSound) return;
+
+    const audio = await ctx.decodeAudioData(rawAudio);
+    playSound.buffer = audio;
+    playSound.connect(ctx.destination);
+    playSound.start(ctx.currentTime);
+  }, [addComment, ctx, message, originUrl, playSound]);
+
   return (
     <Container maxWidth={"xl"}>
       <Stack id={"test"} spacing={2}>
@@ -97,6 +129,15 @@ const App: NextPage = () => {
           <Grid item xs>
             <Button variant={"contained"} size={"large"} onClick={handleSubmit}>
               再生
+            </Button>
+          </Grid>
+          <Grid item xs>
+            <Button
+              variant={"contained"}
+              size={"large"}
+              onClick={handleSubmitWithAi}
+            >
+              chatGPT に聞いてみる
             </Button>
           </Grid>
         </Grid>
