@@ -24,6 +24,8 @@ const App: NextPage = () => {
   const [listening, setListening] = useState<boolean>(false);
   const [recognizer, setRecognizer] = useState<any>(null);
   const [prevListenMessage, setPrevListenMessage] = useState<string>("");
+  const [listenMessageLength, setListenMessageLength] = useState<number>(0);
+  const [listenMessage, setListenMessage] = useState<Array<string>>([]);
   const [addComment] = useMutation(AddCommentDocument);
   const { asPath } = useRouter();
 
@@ -39,19 +41,36 @@ const App: NextPage = () => {
     }
     const recognizer = new Recognition();
     recognizer.lang = "ja-JP";
-    recognizer.interimResults = true;
     recognizer.continuous = true;
     recognizer.onresult = function (event: any) {
       const results = event.results;
-      console.log(results);
       const resultText = results[results.length - 1][0].transcript.trim();
       if (prevListenMessage === resultText) {
         return;
       }
+      if (
+        results.length !== listenMessageLength &&
+        results.length > 1 &&
+        results[results.length - 2][0].transcript.trim() !==
+          listenMessage[listenMessage.length - 1]
+      ) {
+        console.log(results.length);
+        setListenMessageLength(results.length);
+        setListenMessage((prev) => [
+          ...prev,
+          results[results.length - 2][0].transcript.trim(),
+        ]);
+      }
       setPrevListenMessage(resultText);
     };
     setRecognizer(recognizer);
-  }, [Recognition, listening, prevListenMessage]);
+  }, [
+    Recognition,
+    listenMessage,
+    listenMessageLength,
+    listening,
+    prevListenMessage,
+  ]);
 
   const origin =
     typeof window !== "undefined" && window.location.origin
@@ -144,6 +163,8 @@ const App: NextPage = () => {
 
   const handleSpeechStart = useCallback(() => {
     if (recognizer && !listening) {
+      setListenMessage([]);
+      setListenMessageLength(0);
       setListening(true);
       recognizer.start();
     }
@@ -167,7 +188,19 @@ const App: NextPage = () => {
             <Typography variant={"h6"}>音声入力</Typography>
           </Grid>
           <Grid item>
-            <Typography variant={"body2"}>{prevListenMessage}</Typography>
+            <Typography variant={"body2"}>
+              {listenMessage.map((message) => {
+                return (
+                  <>
+                    <span>{message}</span>
+                    <br />
+                  </>
+                );
+              })}
+              {(listenMessage.length === 0 ||
+                listenMessage[listenMessage.length - 1] !==
+                  prevListenMessage) && <span>{prevListenMessage}</span>}
+            </Typography>
           </Grid>
           <Grid item>
             {listening ? (
