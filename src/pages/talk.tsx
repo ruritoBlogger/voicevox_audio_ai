@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Mic, Send, StopCircle } from "@mui/icons-material";
 import { ChatList } from "@components/ChatList";
+import { BottomBar } from "@components/BottomBar";
 
 const Talk: NextPage = () => {
   return (
@@ -38,28 +39,7 @@ const Talk: NextPage = () => {
         >
           <ChatList chatList={["こんにちは", "テスト"]} />
         </Grid>
-        <Grid
-          container
-          spacing={1}
-          alignItems={"center"}
-          style={{ padding: "0 10%" }}
-        >
-          <Grid item xs={10}>
-            <TextField
-              fullWidth
-              multiline
-              label={"メッセージを入力または音声入力"}
-            />
-          </Grid>
-          <Grid item xs>
-            <IconButton>
-              <Mic />
-            </IconButton>
-            <IconButton>
-              <Send />
-            </IconButton>
-          </Grid>
-        </Grid>
+        <BottomBar />
       </Container>
     </div>
   );
