@@ -1,7 +1,7 @@
 import { Mic, Send, Stop } from "@mui/icons-material";
 import { Grid, IconButton, TextField } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { useAudioInput } from "@components/BottomBar/useAudioInput";
+import { useAudioInput } from "./useAudioInput";
 
 export const BottomBar = () => {
   const [message, setMessage] = useState<string>("");
