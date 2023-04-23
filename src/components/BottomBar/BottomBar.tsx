@@ -1,9 +1,16 @@
-import { Mic, Send } from "@mui/icons-material";
+import { Mic, Send, Stop } from "@mui/icons-material";
 import { Grid, IconButton, TextField } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useAudioInput } from "@components/BottomBar/useAudioInput";
 
 export const BottomBar = () => {
   const [message, setMessage] = useState<string>("");
+  const {
+    isListening,
+    message: audioMessage,
+    startListening,
+    stopListening,
+  } = useAudioInput();
 
   const handleTextFieldChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,6 +18,20 @@ export const BottomBar = () => {
     },
     []
   );
+
+  useEffect(() => {
+    if (audioMessage !== "") {
+      setMessage(audioMessage);
+    }
+  }, [audioMessage]);
+
+  const handleMicClick = useCallback(() => {
+    startListening();
+  }, [startListening]);
+
+  const handleStopClick = useCallback(() => {
+    stopListening();
+  }, [stopListening]);
 
   return (
     <>
@@ -20,13 +41,20 @@ export const BottomBar = () => {
             fullWidth
             multiline
             label={"メッセージを入力または音声入力"}
+            value={message}
             onChange={handleTextFieldChange}
           />
         </Grid>
         <Grid item xs>
-          <IconButton>
-            <Mic />
-          </IconButton>
+          {isListening ? (
+            <IconButton onClick={handleStopClick}>
+              <Stop />
+            </IconButton>
+          ) : (
+            <IconButton onClick={handleMicClick}>
+              <Mic />
+            </IconButton>
+          )}
           <IconButton>
             <Send />
           </IconButton>
