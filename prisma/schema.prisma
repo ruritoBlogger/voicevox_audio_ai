@@ -13,6 +13,7 @@ datasource db {
 model Comment {
   id        Int         @id @default(autoincrement())
   createdAt DateTime    @default(now())
+  author    String      @db.VarChar(255)
   updatedAt DateTime    @updatedAt
   content   String      @db.VarChar(255)
 }

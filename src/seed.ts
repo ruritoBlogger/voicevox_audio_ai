@@ -7,6 +7,7 @@ async function main() {
     create: {
       id: 1,
       content: "ずんだもんなのだ",
+      author: "AI",
     },
   });
 
@@ -16,6 +17,7 @@ async function main() {
     create: {
       id: 2,
       content: "よろしくなのだ",
+      author: "AI",
     },
   });
 }

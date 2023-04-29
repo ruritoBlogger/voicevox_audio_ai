@@ -11,6 +11,8 @@ export const addComment: MutationResolvers["addComment"] = async (
   const comment = await prisma.comment.create({
     data: {
       content: args.data.content,
+      // TODO: 引数を用いて設定する
+      author: "AI",
     },
   });
   return {

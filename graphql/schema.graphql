@@ -1,5 +1,10 @@
 scalar Date
 
+enum CommentAuthorType {
+    USER
+    AI
+}
+
 type Query {
     comments: [Comment!]!
 }
@@ -24,6 +29,7 @@ type DeleteCommentPayload {
 type Comment {
     id: ID!
     content: String!
+    author: CommentAuthorType!
     createdAt: Date!
     updatedAt: Date!
 }
