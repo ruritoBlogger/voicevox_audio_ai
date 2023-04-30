@@ -15,5 +15,5 @@ model Comment {
   createdAt DateTime    @default(now())
   author    String      @db.VarChar(255)
   updatedAt DateTime    @updatedAt
-  content   String      @db.VarChar(255)
+  content   String      @db.Text
 }
