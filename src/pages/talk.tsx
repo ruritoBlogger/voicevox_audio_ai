@@ -6,11 +6,17 @@ import { useFetchChatResponse } from "@hooks/useFetchChatResponse";
 import { useFetchAudioData } from "@hooks/useFetchAudioData";
 import { useCallback } from "react";
 import { usePlaySound } from "@hooks/usePlaySound";
+import { useMutation } from "@apollo/client";
+import {
+  AddCommentDocument,
+  CommentsDocument,
+} from "../../graphql/dist/client/graphql";
 
 const Talk: NextPage = () => {
   const { fetchChatGPT } = useFetchChatResponse();
   const { fetchAudioData } = useFetchAudioData();
   const { playSound } = usePlaySound();
+  const [addComment] = useMutation(AddCommentDocument);
 
   const originUrl =
     typeof window !== "undefined" && window.location.origin
@@ -23,12 +29,31 @@ const Talk: NextPage = () => {
     async (message: string) => {
       if (!ctx || !audioNode) return;
 
+      // TODO: refetch せずにキャッシュを書き換える
+      await addComment({
+        variables: { content: message },
+        refetchQueries: [CommentsDocument],
+      });
+
       const aiMessage = await fetchChatGPT(originUrl, message);
+      await addComment({
+        variables: { content: aiMessage },
+        refetchQueries: [CommentsDocument],
+      });
+
       const audioData = await fetchAudioData(originUrl, aiMessage, ctx);
 
       playSound(audioData, audioNode, ctx);
     },
-    [audioNode, ctx, fetchAudioData, fetchChatGPT, originUrl, playSound]
+    [
+      addComment,
+      audioNode,
+      ctx,
+      fetchAudioData,
+      fetchChatGPT,
+      originUrl,
+      playSound,
+    ]
   );
 
   return (
