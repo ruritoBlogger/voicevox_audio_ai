@@ -31,6 +31,7 @@ export const BottomBar = ({ onSubmit }: BottomBarProps) => {
 
   const handleSubmit = useCallback(async () => {
     await onSubmit(message);
+    setMessage("");
   }, [message, onSubmit]);
 
   const handleMicClick = useCallback(() => {
