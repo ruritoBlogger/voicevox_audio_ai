@@ -4,7 +4,7 @@ import { ChatList } from "@components/ChatList";
 import { BottomBar } from "@components/BottomBar";
 import { useFetchChatResponse } from "@hooks/useFetchChatResponse";
 import { useFetchAudioData } from "@hooks/useFetchAudioData";
-import { useCallback } from "react";
+import { Suspense, useCallback } from "react";
 import { usePlaySound } from "@hooks/usePlaySound";
 import { useMutation } from "@apollo/client";
 import {
@@ -80,7 +80,9 @@ const Talk: NextPage = () => {
           justifyContent={"flex-end"}
           style={{ flex: "1" }}
         >
-          <ChatList />
+          <Suspense fallback={<div>loading...</div>}>
+            <ChatList />
+          </Suspense>
         </Grid>
         <BottomBar onSubmit={handleSubmit} />
       </Container>
