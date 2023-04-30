@@ -80,7 +80,7 @@ const Talk: NextPage = () => {
           justifyContent={"flex-end"}
           style={{ flex: "1" }}
         >
-          <ChatList chatList={["こんにちは", "テスト"]} />
+          <ChatList />
         </Grid>
         <BottomBar onSubmit={handleSubmit} />
       </Container>
