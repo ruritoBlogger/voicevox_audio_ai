@@ -1,14 +1,5 @@
 import { NextPage } from "next";
-import {
-  AppBar,
-  Box,
-  Container,
-  Grid,
-  IconButton,
-  Stack,
-  TextField,
-} from "@mui/material";
-import { Mic, Send, StopCircle } from "@mui/icons-material";
+import { Container, Grid } from "@mui/material";
 import { ChatList } from "@components/ChatList";
 import { BottomBar } from "@components/BottomBar";
 import { useFetchChatResponse } from "@hooks/useFetchChatResponse";
