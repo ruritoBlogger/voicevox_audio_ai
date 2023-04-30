@@ -3,7 +3,11 @@ import { Grid, IconButton, TextField } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { useAudioInput } from "./useAudioInput";
 
-export const BottomBar = () => {
+interface BottomBarProps {
+  onSubmit(message: string): Promise<void>;
+}
+
+export const BottomBar = ({ onSubmit }: BottomBarProps) => {
   const [message, setMessage] = useState<string>("");
   const {
     isListening,
@@ -24,6 +28,10 @@ export const BottomBar = () => {
       setMessage(audioMessage);
     }
   }, [audioMessage]);
+
+  const handleSubmit = useCallback(async () => {
+    await onSubmit(message);
+  }, [message, onSubmit]);
 
   const handleMicClick = useCallback(() => {
     startListening();
@@ -55,7 +63,7 @@ export const BottomBar = () => {
               <Mic />
             </IconButton>
           )}
-          <IconButton>
+          <IconButton onClick={handleSubmit}>
             <Send />
           </IconButton>
         </Grid>

@@ -11,8 +11,35 @@ import {
 import { Mic, Send, StopCircle } from "@mui/icons-material";
 import { ChatList } from "@components/ChatList";
 import { BottomBar } from "@components/BottomBar";
+import { useFetchChatResponse } from "@hooks/useFetchChatResponse";
+import { useFetchAudioData } from "@hooks/useFetchAudioData";
+import { useCallback } from "react";
+import { usePlaySound } from "@hooks/usePlaySound";
 
 const Talk: NextPage = () => {
+  const { fetchChatGPT } = useFetchChatResponse();
+  const { fetchAudioData } = useFetchAudioData();
+  const { playSound } = usePlaySound();
+
+  const originUrl =
+    typeof window !== "undefined" && window.location.origin
+      ? window.location.origin
+      : "";
+  const ctx = typeof window !== "undefined" ? new AudioContext() : null;
+  const audioNode = ctx?.createBufferSource() ?? null;
+
+  const handleSubmit = useCallback(
+    async (message: string) => {
+      if (!ctx || !audioNode) return;
+
+      const aiMessage = await fetchChatGPT(originUrl, message);
+      const audioData = await fetchAudioData(originUrl, aiMessage, ctx);
+
+      playSound(audioData, audioNode, ctx);
+    },
+    [audioNode, ctx, fetchAudioData, fetchChatGPT, originUrl, playSound]
+  );
+
   return (
     <div
       style={{
@@ -39,7 +66,7 @@ const Talk: NextPage = () => {
         >
           <ChatList chatList={["こんにちは", "テスト"]} />
         </Grid>
-        <BottomBar />
+        <BottomBar onSubmit={handleSubmit} />
       </Container>
     </div>
   );
