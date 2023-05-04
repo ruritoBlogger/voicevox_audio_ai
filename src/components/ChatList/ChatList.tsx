@@ -12,7 +12,24 @@ export const ChatList = (): JSX.Element => {
       <Grid container spacing={1} direction={"column"} alignItems={"center"}>
         {data.comments.map((comment) => {
           return (
-            <Grid container item key={comment.id} alignItems={"center"}>
+            <Grid
+              container
+              item
+              key={comment.id}
+              alignItems={"center"}
+              spacing={2}
+              justifyContent={comment.author === "USER" ? "left" : "right"}
+            >
+              {comment.author === "USER" && (
+                <Grid item>
+                  <p>test</p>
+                </Grid>
+              )}
+              <Grid item>
+                <div className={paperStyle} data-author={comment.author}>
+                  <Typography variant={"body2"}>{comment.content}</Typography>
+                </div>
+              </Grid>
               {comment.author === "AI" && (
                 <Grid item>
                   <Image
@@ -21,17 +38,6 @@ export const ChatList = (): JSX.Element => {
                     width={50}
                     height={55}
                   />
-                </Grid>
-              )}
-
-              <Grid item>
-                <div className={paperStyle} data-author={comment.author}>
-                  <Typography variant={"body2"}>{comment.content}</Typography>
-                </div>
-              </Grid>
-              {comment.author === "USER" && (
-                <Grid item>
-                  <p>test</p>
                 </Grid>
               )}
             </Grid>
@@ -59,7 +65,7 @@ const paperStyle = css`
     top: 50%;
   }
 
-  &&[data-author="AI"]:before {
+  &&[data-author="USER"]:before {
     left: -24px;
     margin-top: -12px;
     border: 12px solid transparent;
@@ -67,7 +73,7 @@ const paperStyle = css`
     z-index: 2;
   }
 
-  &&[data-author="AI"]:after {
+  &&[data-author="USER"]:after {
     left: -30px;
     margin-top: -14px;
     border: 14px solid transparent;
@@ -75,7 +81,7 @@ const paperStyle = css`
     z-index: 1;
   }
 
-  &&[data-author="USER"]:before {
+  &&[data-author="AI"]:before {
     right: -24px;
     margin-top: -12px;
     border: 12px solid transparent;
@@ -83,7 +89,7 @@ const paperStyle = css`
     z-index: 2;
   }
 
-  &&[data-author="USER"]:after {
+  &&[data-author="AI"]:after {
     right: -30px;
     margin-top: -14px;
     border: 14px solid transparent;

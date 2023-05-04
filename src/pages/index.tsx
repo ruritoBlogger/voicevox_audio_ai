@@ -78,7 +78,7 @@ const Home: NextPage = () => {
           spacing={2}
           direction={"column"}
           justifyContent={"flex-end"}
-          style={{ flex: "1" }}
+          style={{ flex: "1", padding: "0 10%" }}
         >
           <Suspense fallback={<div>loading...</div>}>
             <ChatList />
