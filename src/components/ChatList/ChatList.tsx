@@ -12,6 +12,7 @@ export const ChatList = (): JSX.Element => {
     <>
       <Grid container spacing={1} direction={"column"} alignItems={"center"}>
         {data.comments.map((comment) => {
+          // TODO: 文章が長い時の対応
           return (
             <Grid
               container

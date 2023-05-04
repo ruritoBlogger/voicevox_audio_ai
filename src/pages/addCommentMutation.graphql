@@ -1,6 +1,9 @@
-mutation addComment($content: String!) {
-    addComment(data: {content: $content}) {
+mutation addComment($content: String!, $author: CommentAuthorType!) {
+    addComment(data: {content: $content, author: $author}) {
         id
+        author
         content
+        createdAt
+        updatedAt
     }
 }

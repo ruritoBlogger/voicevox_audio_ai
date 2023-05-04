@@ -9,6 +9,7 @@ import { usePlaySound } from "@hooks/usePlaySound";
 import { useMutation } from "@apollo/client";
 import {
   AddCommentDocument,
+  CommentAuthorType,
   CommentsDocument,
 } from "../../graphql/dist/client/graphql";
 
@@ -29,15 +30,14 @@ const Home: NextPage = () => {
     async (message: string) => {
       if (!ctx || !audioNode) return;
 
-      // TODO: refetch せずにキャッシュを書き換える
       await addComment({
-        variables: { content: message },
-        refetchQueries: [CommentsDocument],
+        variables: { content: message, author: CommentAuthorType.User },
       });
 
       const aiMessage = await fetchChatGPT(originUrl, message);
+      // TODO: refetch せずにキャッシュを書き換える
       await addComment({
-        variables: { content: aiMessage },
+        variables: { content: aiMessage, author: CommentAuthorType.Ai },
         refetchQueries: [CommentsDocument],
       });
 

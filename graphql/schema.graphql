@@ -15,6 +15,7 @@ type Mutation {
 
 input AddCommentInput {
     content: String!
+    author: CommentAuthorType!
 }
 
 type Comment {
