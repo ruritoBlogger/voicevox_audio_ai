@@ -2,6 +2,7 @@ query comments {
     comments {
         id
         content
+        author
         createdAt
         updatedAt
     }
