@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useSuspenseQuery_experimental as useSuspenseQuery } from "@apollo/client";
 import { CommentsDocument } from "../../../graphql/dist/client/graphql";
 import { css } from "@emotion/css";
+import Image from "next/image";
 
 export const ChatList = (): JSX.Element => {
   const { data } = useSuspenseQuery(CommentsDocument);
@@ -11,10 +12,28 @@ export const ChatList = (): JSX.Element => {
       <Grid container spacing={1} direction={"column"} alignItems={"center"}>
         {data.comments.map((comment) => {
           return (
-            <Grid item key={comment.id}>
-              <div className={paperStyle} data-author={comment.author}>
-                <Typography variant={"body2"}>{comment.content}</Typography>
-              </div>
+            <Grid container item key={comment.id} alignItems={"center"}>
+              {comment.author === "AI" && (
+                <Grid item>
+                  <Image
+                    src={"/zundamon.png"}
+                    alt={"ずんだもんのアイコン"}
+                    width={50}
+                    height={55}
+                  />
+                </Grid>
+              )}
+
+              <Grid item>
+                <div className={paperStyle} data-author={comment.author}>
+                  <Typography variant={"body2"}>{comment.content}</Typography>
+                </div>
+              </Grid>
+              {comment.author === "USER" && (
+                <Grid item>
+                  <p>test</p>
+                </Grid>
+              )}
             </Grid>
           );
         })}
