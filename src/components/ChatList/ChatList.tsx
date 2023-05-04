@@ -3,6 +3,7 @@ import { useSuspenseQuery_experimental as useSuspenseQuery } from "@apollo/clien
 import { CommentsDocument } from "../../../graphql/dist/client/graphql";
 import { css } from "@emotion/css";
 import Image from "next/image";
+import { AccountCircle } from "@mui/icons-material";
 
 export const ChatList = (): JSX.Element => {
   const { data } = useSuspenseQuery(CommentsDocument);
@@ -22,7 +23,7 @@ export const ChatList = (): JSX.Element => {
             >
               {comment.author === "USER" && (
                 <Grid item>
-                  <p>test</p>
+                  <AccountCircle fontSize={"large"} />
                 </Grid>
               )}
               <Grid item>

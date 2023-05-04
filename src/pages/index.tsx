@@ -65,7 +65,7 @@ const Home: NextPage = () => {
       }}
     >
       <Container
-        maxWidth={"lg"}
+        maxWidth={"md"}
         style={{
           height: "100%",
           padding: "32px",
