@@ -22,3 +22,10 @@ $ docker compose run --rm app yarn prisma:studio
 # prisma の seed データの挿入
 $ docker compose run --rm app yarn prisma:seed
 ```
+
+### 利用している画像について
+
+本プロジェクトで利用しているずんだもんの画像については、
+東北ずん子・ずんだもんプロジェクトで配布されているイラストを一部切り出して利用しています。
+    
+[東北ずん子・ずんだもんプロジェクト](https://zunko.jp/)
