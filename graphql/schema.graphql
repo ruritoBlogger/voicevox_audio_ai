@@ -11,19 +11,10 @@ type Query {
 
 type Mutation {
     addComment(data: AddCommentInput!): Comment!
-    deleteComment(data: DeleteCommentInput!): DeleteCommentPayload!
 }
 
 input AddCommentInput {
     content: String!
-}
-
-input DeleteCommentInput {
-    id: ID!
-}
-
-type DeleteCommentPayload {
-    id: ID!
 }
 
 type Comment {
