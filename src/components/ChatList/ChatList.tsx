@@ -22,26 +22,9 @@ export const ChatList = (): JSX.Element => {
               spacing={2}
               justifyContent={comment.author === "USER" ? "left" : "right"}
             >
-              {comment.author === "USER" && (
-                <Grid item>
-                  <AccountCircle fontSize={"large"} />
-                </Grid>
-              )}
-              <Grid item>
-                <div className={paperStyle} data-author={comment.author}>
-                  <Typography variant={"body2"}>{comment.content}</Typography>
-                </div>
-              </Grid>
-              {comment.author === "AI" && (
-                <Grid item>
-                  <Image
-                    src={"/zundamon.png"}
-                    alt={"ずんだもんのアイコン"}
-                    width={50}
-                    height={55}
-                  />
-                </Grid>
-              )}
+              <div className={paperStyle} data-author={comment.author}>
+                <Typography variant={"body2"}>{comment.content}</Typography>
+              </div>
             </Grid>
           );
         })}

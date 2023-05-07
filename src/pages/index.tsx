@@ -75,7 +75,7 @@ const Home: NextPage = () => {
         <Grid item xs={2}>
           <Box position={"relative"} width={"100%"} height={"100%"}>
             <Image
-              src={"/zundamon2.png"}
+              src={"/zundamon.png"}
               alt={"ずんだもんの立ち絵"}
               layout={"fill"}
               objectFit={"contain"}
