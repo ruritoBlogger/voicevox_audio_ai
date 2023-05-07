@@ -1,13 +1,20 @@
 import { Mic, Send, Stop } from "@mui/icons-material";
-import { Grid, IconButton, TextField } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  IconButton,
+  TextField,
+} from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { useAudioInput } from "./useAudioInput";
 
 interface BottomBarProps {
   onSubmit(message: string): Promise<void>;
+  loading: boolean;
 }
 
-export const BottomBar = ({ onSubmit }: BottomBarProps) => {
+export const BottomBar = ({ onSubmit, loading }: BottomBarProps) => {
   const [message, setMessage] = useState<string>("");
   const {
     isListening,
@@ -64,9 +71,14 @@ export const BottomBar = ({ onSubmit }: BottomBarProps) => {
               <Mic />
             </IconButton>
           )}
-          <IconButton onClick={handleSubmit}>
-            <Send />
-          </IconButton>
+          <Button
+            variant={"outlined"}
+            onClick={handleSubmit}
+            disabled={loading}
+            startIcon={loading ? <CircularProgress size={20} /> : <Send />}
+          >
+            送信
+          </Button>
         </Grid>
       </Grid>
     </>

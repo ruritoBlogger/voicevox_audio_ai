@@ -14,7 +14,7 @@ import {
 } from "../../graphql/dist/client/graphql";
 
 const Home: NextPage = () => {
-  const { fetchChatGPT } = useFetchChatResponse();
+  const { fetchChatGPT, loading } = useFetchChatResponse();
   const { fetchAudioData } = useFetchAudioData();
   const { playSound } = usePlaySound();
   const [addComment] = useMutation(AddCommentDocument);
@@ -84,7 +84,7 @@ const Home: NextPage = () => {
             <ChatList />
           </Suspense>
         </Grid>
-        <BottomBar onSubmit={handleSubmit} />
+        <BottomBar onSubmit={handleSubmit} loading={loading} />
       </Container>
     </div>
   );
