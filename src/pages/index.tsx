@@ -59,26 +59,21 @@ const Home: NextPage = () => {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
-        minHeight: "100vh",
+        maxHeight: "100vh",
+        display: "flex",
       }}
     >
       <Container
         maxWidth={"md"}
         style={{
-          height: "100%",
           padding: "32px",
-          display: "flex",
-          flexDirection: "column",
         }}
       >
         <Grid
           container
           spacing={2}
           direction={"column"}
-          justifyContent={"flex-end"}
-          style={{ flex: "1", padding: "0 10%" }}
+          style={{ padding: "0 10%" }}
         >
           <Suspense fallback={<div>loading...</div>}>
             <ChatList />

@@ -3,8 +3,5 @@ dist
 .idea
 .next
 out
-public/*
-!public/.gitkeep
-!public/zundamon.png
 *.wav
 .env
