@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { ChatList } from "@components/ChatList";
 import { BottomBar } from "@components/BottomBar";
 import { useFetchChatResponse } from "@hooks/useFetchChatResponse";
@@ -12,6 +12,7 @@ import {
   CommentAuthorType,
   CommentsDocument,
 } from "../../graphql/dist/client/graphql";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const { fetchChatGPT, loading } = useFetchChatResponse();
@@ -63,24 +64,25 @@ const Home: NextPage = () => {
         display: "flex",
       }}
     >
-      <Container
-        maxWidth={"md"}
-        style={{
-          padding: "32px",
-        }}
-      >
-        <Grid
-          container
-          spacing={2}
-          direction={"column"}
-          style={{ padding: "0 10%" }}
-        >
+      <Grid container direction={"row"}>
+        <Grid item xs={2} />
+        <Grid container item xs spacing={2} direction={"column"}>
           <Suspense fallback={<div>loading...</div>}>
             <ChatList />
           </Suspense>
+          <BottomBar onSubmit={handleSubmit} loading={loading} />
         </Grid>
-        <BottomBar onSubmit={handleSubmit} loading={loading} />
-      </Container>
+        <Grid item xs={2}>
+          <Box position={"relative"} width={"100%"} height={"100%"}>
+            <Image
+              src={"/zundamon2.png"}
+              alt={"ずんだもんの立ち絵"}
+              layout={"fill"}
+              objectFit={"contain"}
+            />
+          </Box>
+        </Grid>
+      </Grid>
     </div>
   );
 };
