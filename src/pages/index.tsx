@@ -72,7 +72,7 @@ const Home: NextPage = () => {
                 style={{
                   maxHeight: "calc(100% - 76px)",
                   padding: "0 3%",
-                  overflowY: "scroll",
+                  overflowY: "auto",
                 }}
               >
                 <ChatList />
