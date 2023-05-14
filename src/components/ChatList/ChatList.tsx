@@ -2,9 +2,20 @@ import { Grid, Typography } from "@mui/material";
 import { useSuspenseQuery_experimental as useSuspenseQuery } from "@apollo/client";
 import { CommentsDocument } from "../../../graphql/dist/client/graphql";
 import { css } from "@emotion/css";
+import { useEffect } from "react";
 
 export const ChatList = (): JSX.Element => {
   const { data } = useSuspenseQuery(CommentsDocument);
+
+  useEffect(() => {
+    if (data.comments.length > 0) {
+      document
+        .getElementById(
+          `Comment_${data.comments[data.comments.length - 1]?.id}`
+        )
+        ?.scrollIntoView();
+    }
+  }, [data]);
 
   return (
     <>
@@ -15,6 +26,7 @@ export const ChatList = (): JSX.Element => {
               container
               item
               key={comment.id}
+              id={`Comment_${comment.id}`}
               alignItems={"center"}
               spacing={2}
               justifyContent={comment.author === "USER" ? "left" : "right"}
