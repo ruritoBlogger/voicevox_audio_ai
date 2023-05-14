@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 interface UseFetchAudioDataReturn {
   fetchAudioData: (
@@ -6,15 +6,19 @@ interface UseFetchAudioDataReturn {
     message: string,
     ctx: AudioContext
   ) => Promise<AudioBuffer>;
+  loading: boolean;
 }
 
 export const useFetchAudioData = (): UseFetchAudioDataReturn => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const fetchAudioData = useCallback(
     async (
       originUrl: string,
       message: string,
       ctx: AudioContext
     ): Promise<AudioBuffer> => {
+      await setLoading(true);
       const rawData = await fetch(`${originUrl}/api/voicevox`, {
         method: "POST",
         headers: {
@@ -24,6 +28,7 @@ export const useFetchAudioData = (): UseFetchAudioDataReturn => {
       });
       const rawAudio = await rawData.arrayBuffer();
 
+      setLoading(false);
       return await ctx.decodeAudioData(rawAudio);
     },
     []
@@ -31,5 +36,6 @@ export const useFetchAudioData = (): UseFetchAudioDataReturn => {
 
   return {
     fetchAudioData,
+    loading,
   };
 };

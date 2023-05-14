@@ -4,7 +4,7 @@ import { ChatList } from "@components/ChatList";
 import { BottomBar } from "@components/BottomBar";
 import { useFetchChatResponse } from "@hooks/useFetchChatResponse";
 import { useFetchAudioData } from "@hooks/useFetchAudioData";
-import { Suspense, useCallback } from "react";
+import { Suspense, useCallback, useMemo } from "react";
 import { usePlaySound } from "@hooks/usePlaySound";
 import { useMutation } from "@apollo/client";
 import {
@@ -15,10 +15,14 @@ import {
 import Image from "next/image";
 
 const Home: NextPage = () => {
-  const { fetchChatGPT, loading } = useFetchChatResponse();
-  const { fetchAudioData } = useFetchAudioData();
+  const { fetchChatGPT, loading: loadingChatApi } = useFetchChatResponse();
+  const { fetchAudioData, loading: loadingAudio } = useFetchAudioData();
   const { playSound } = usePlaySound();
   const [addComment] = useMutation(AddCommentDocument);
+  const loading = useMemo(
+    () => loadingChatApi || loadingAudio,
+    [loadingAudio, loadingChatApi]
+  );
 
   const originUrl =
     typeof window !== "undefined" && window.location.origin

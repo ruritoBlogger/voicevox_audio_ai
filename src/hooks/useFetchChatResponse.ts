@@ -10,7 +10,7 @@ export const useFetchChatResponse = (): UseFetchChatResponseReturn => {
 
   const fetchChatGPT = useCallback(
     async (originUrl: string, message: string): Promise<string> => {
-      await setLoading(true);
+      setLoading(true);
       const rawChatData = await fetch(`${originUrl}/api/chatgpt`, {
         method: "POST",
         headers: {
@@ -19,7 +19,7 @@ export const useFetchChatResponse = (): UseFetchChatResponseReturn => {
         body: JSON.stringify({ message: message }),
       });
       const parsedChatData = await rawChatData.json();
-      await setLoading(false);
+      setLoading(false);
       return parsedChatData.message.content;
     },
     []
