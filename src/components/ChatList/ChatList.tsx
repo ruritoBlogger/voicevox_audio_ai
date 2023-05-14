@@ -2,8 +2,6 @@ import { Grid, Typography } from "@mui/material";
 import { useSuspenseQuery_experimental as useSuspenseQuery } from "@apollo/client";
 import { CommentsDocument } from "../../../graphql/dist/client/graphql";
 import { css } from "@emotion/css";
-import Image from "next/image";
-import { AccountCircle } from "@mui/icons-material";
 
 export const ChatList = (): JSX.Element => {
   const { data } = useSuspenseQuery(CommentsDocument);
@@ -12,7 +10,6 @@ export const ChatList = (): JSX.Element => {
     <>
       <Grid container spacing={1} direction={"column"} alignItems={"center"}>
         {data.comments.map((comment) => {
-          // TODO: 文章が長い時の対応
           return (
             <Grid
               container
