@@ -94,7 +94,11 @@ const Home: NextPage = () => {
         <Grid item xs={3}>
           <Stack justifyContent={"flex-end"} style={{ height: "100%" }}>
             <Box position={"relative"} width={"100%"} height={"700px"}>
-              <Bubble />
+              {loading && (
+                <div style={{ paddingLeft: "50%" }}>
+                  <Bubble />
+                </div>
+              )}
               <Image
                 src={"/zundamon.png"}
                 alt={"ずんだもんの立ち絵"}
