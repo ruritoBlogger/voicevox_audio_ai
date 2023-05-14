@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import { ChatList } from "@components/ChatList";
 import { BottomBar } from "@components/BottomBar";
 import { useFetchChatResponse } from "@hooks/useFetchChatResponse";
@@ -79,14 +79,16 @@ const Home: NextPage = () => {
           <BottomBar onSubmit={handleSubmit} loading={loading} />
         </Grid>
         <Grid item xs={3}>
-          <Box position={"relative"} width={"100%"} height={"100%"}>
-            <Image
-              src={"/zundamon.png"}
-              alt={"ずんだもんの立ち絵"}
-              layout={"fill"}
-              objectFit={"contain"}
-            />
-          </Box>
+          <Stack justifyContent={"flex-end"} style={{ height: "100%" }}>
+            <Box position={"relative"} width={"100%"} height={"700px"}>
+              <Image
+                src={"/zundamon.png"}
+                alt={"ずんだもんの立ち絵"}
+                layout={"fill"}
+                objectFit={"contain"}
+              />
+            </Box>
+          </Stack>
         </Grid>
       </Grid>
     </div>
