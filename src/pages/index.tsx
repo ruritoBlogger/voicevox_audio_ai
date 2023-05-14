@@ -60,23 +60,28 @@ const Home: NextPage = () => {
   return (
     <div
       style={{
-        maxHeight: "100vh",
+        height: "100vh",
         display: "flex",
       }}
     >
       <Grid container direction={"row"}>
-        <Grid
-          container
-          item
-          xs
-          spacing={2}
-          direction={"column"}
-          style={{ padding: "3%" }}
-        >
-          <Suspense fallback={<div>loading...</div>}>
-            <ChatList />
-          </Suspense>
-          <BottomBar onSubmit={handleSubmit} loading={loading} />
+        <Grid item xs style={{ padding: "3%", height: "100%" }}>
+          <Stack justifyContent={"flex-end"} style={{ height: "100%" }}>
+            <Suspense fallback={<div>loading...</div>}>
+              <div
+                style={{
+                  maxHeight: "calc(100% - 76px)",
+                  padding: "0 3%",
+                  overflowY: "scroll",
+                }}
+              >
+                <ChatList />
+              </div>
+            </Suspense>
+            <div style={{ paddingTop: "20px" }}>
+              <BottomBar onSubmit={handleSubmit} loading={loading} />
+            </div>
+          </Stack>
         </Grid>
         <Grid item xs={3}>
           <Stack justifyContent={"flex-end"} style={{ height: "100%" }}>
