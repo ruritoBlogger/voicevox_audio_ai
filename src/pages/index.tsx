@@ -42,13 +42,13 @@ const Home: NextPage = () => {
       });
 
       const aiMessage = await fetchChatGPT(originUrl, message);
+      const audioData = await fetchAudioData(originUrl, aiMessage, ctx);
+
       // TODO: refetch せずにキャッシュを書き換える
       await addComment({
         variables: { content: aiMessage, author: CommentAuthorType.Ai },
         refetchQueries: [CommentsDocument],
       });
-
-      const audioData = await fetchAudioData(originUrl, aiMessage, ctx);
 
       playSound(audioData, audioNode, ctx);
     },
