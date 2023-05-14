@@ -65,14 +65,20 @@ const Home: NextPage = () => {
       }}
     >
       <Grid container direction={"row"}>
-        <Grid item xs={2} />
-        <Grid container item xs spacing={2} direction={"column"}>
+        <Grid
+          container
+          item
+          xs
+          spacing={2}
+          direction={"column"}
+          style={{ padding: "3%" }}
+        >
           <Suspense fallback={<div>loading...</div>}>
             <ChatList />
           </Suspense>
           <BottomBar onSubmit={handleSubmit} loading={loading} />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <Box position={"relative"} width={"100%"} height={"100%"}>
             <Image
               src={"/zundamon.png"}
