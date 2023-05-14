@@ -14,6 +14,7 @@ import {
 } from "../../graphql/dist/client/graphql";
 import Image from "next/image";
 import { Header } from "@components/Header";
+import { Bubble } from "@components/Bubble";
 
 const Home: NextPage = () => {
   const { fetchChatGPT, loading: loadingChatApi } = useFetchChatResponse();
@@ -93,6 +94,7 @@ const Home: NextPage = () => {
         <Grid item xs={3}>
           <Stack justifyContent={"flex-end"} style={{ height: "100%" }}>
             <Box position={"relative"} width={"100%"} height={"700px"}>
+              <Bubble />
               <Image
                 src={"/zundamon.png"}
                 alt={"ずんだもんの立ち絵"}
