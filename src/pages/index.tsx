@@ -13,6 +13,7 @@ import {
   CommentsDocument,
 } from "../../graphql/dist/client/graphql";
 import Image from "next/image";
+import { Header } from "@components/Header";
 
 const Home: NextPage = () => {
   const { fetchChatGPT, loading: loadingChatApi } = useFetchChatResponse();
@@ -66,8 +67,10 @@ const Home: NextPage = () => {
       style={{
         height: "100vh",
         display: "flex",
+        flexDirection: "column",
       }}
     >
+      <Header />
       <Grid container direction={"row"}>
         <Grid item xs style={{ padding: "3%", height: "100%" }}>
           <Stack justifyContent={"flex-end"} style={{ height: "100%" }}>
