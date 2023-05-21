@@ -72,7 +72,7 @@ const Home: NextPage = () => {
       }}
     >
       <Header />
-      <Grid container direction={"row"}>
+      <Grid container direction={"row"} style={{ height: "100%" }}>
         <Grid item xs style={{ padding: "3%", height: "100%" }}>
           <Stack justifyContent={"flex-end"} style={{ height: "100%" }}>
             <Suspense fallback={<div>loading...</div>}>

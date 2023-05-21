@@ -1,5 +1,9 @@
 # VoiceVox Audio AI
 
+![image](/public/chat_zundamon.png)
+
+> 上記画像では、東北ずん子・ずんだもんプロジェクトで配布されているイラストを利用しています。
+
 ### 概要
 
 VoiceVox + ChatGPT を用いて会話が出来るような web サイトです(予定)
